@@ -7,10 +7,6 @@ metadata:
 spec:
   containers:
   - name: app
-    image: mahendrashinde/myweb:1
-    resources:
-      limits:
-        memory: 32Mi
-        cpu: 100m
+    image: mahendrshinde/myweb:1
     ports:
       - containerPort: 80
