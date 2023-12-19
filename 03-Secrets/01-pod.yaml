@@ -5,11 +5,15 @@ metadata:
   labels:
     name: myapp
 spec:
+  volumes:
+  - name: vol
+    secret:
+      secretName: mysecrets
   containers:
   - name: myapp
-    envFrom:
-      - secretRef:
-          name: mysecrets
+    volumeMounts:
+      - mountPath: /vars
+        name: vol
     image: nginx:alpine
     resources:
       limits:
