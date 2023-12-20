@@ -28,9 +28,19 @@ metadata:
   name: app
 spec:
   # clusterIP is default type
-  type: ClusterIP
+  # type: ClusterIP
+  # selector:
+  #   app: app8
+  # ports:
+  # - port: 80
+  #   targetPort: 80 #pod port
+
+  # clusterIP is default type
+  type: NodePort
   selector:
     app: app8
   ports:
   - port: 80
     targetPort: 80 #pod port
+    nodePort: 30001 #option port, if not specified
+                    #random port selected 
