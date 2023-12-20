@@ -15,19 +15,30 @@ spec:
       containers:
       - name: myapp
         image: mahendrshinde/myweb:1
-        # check if probe is succeeded
-        # when probe fails it will restart the pod
-        startupProbe:
+        # Check if probe is SUCCESSEED 
+        # When probe FAILs, Force RESTART of Pod
+        livenessProbe:
           httpGet:
-            path: /
-            scheme: HTTP
-            port: 80 # container port (port no on  which app is running)
-          successThreshold: 1 # One success will kill the probe
-          periodSeconds: 10 # Run Every 10 sec
-          timeoutSeconds: 5 # req should be processed within 10 secs
+              path: /
+              scheme: HTTP
+              port: 80
+          failureThreshold: 2
+          periodSeconds: 10  # Every 10 seconds, repeat the probe
+          timeoutSeconds: 5 # Expect Response in 5 seconds
+
+        # Wait for NGINX to create access.log
+        # Nginx would create this log file only when the NGINX process is launched successfuly
+        startupProbe:
+          exec:
+            command:
+              - ls -l /var/nginx/access.log
+          failureThreshold: 5
+          periodSeconds: 10
+          timeoutSeconds: 2
+
         resources:
           limits:
-            memory: "128Mi"
-            cpu: "500m"
+            memory: "64Mi"
+            cpu: "100m"
         ports:
         - containerPort: 80
