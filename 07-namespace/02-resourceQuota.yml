@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota1
+  namespace: nitin
+spec:
+  hard:
+    cpu: '1600m'
+    memory: '1Gi'
+    pods: '10'
