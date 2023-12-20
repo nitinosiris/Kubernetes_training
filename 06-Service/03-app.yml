@@ -36,11 +36,18 @@ spec:
   #   targetPort: 80 #pod port
 
   # clusterIP is default type
-  type: NodePort
+  # type: NodePort
+  # selector:
+  #   app: app8
+  # ports:
+  # - port: 80
+  #   targetPort: 80 #pod port
+  #   nodePort: 30001 #option port, if not specified
+  #                   #random port selected 
+  type: LoadBalancer
   selector:
     app: app8
   ports:
-  - port: 80
+  - port: 8080
     targetPort: 80 #pod port
-    nodePort: 30001 #option port, if not specified
-                    #random port selected 
+    # let k8s decide which port to use
