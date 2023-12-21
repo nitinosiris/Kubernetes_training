@@ -48,5 +48,5 @@ spec:
   selector:
     app: app8
   ports:
-  - port: 80
-    targetPort: web
+  - port: 80        #port exposed by service
+    targetPort: web #port exposed by POD, in this case web is alias for port 80
